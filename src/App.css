@@ -1,0 +1,165 @@
+.App {
+  text-align: center;
+}
+
+.layoutBG {
+  height:100vh;
+  width:100vw;
+  padding:0 50px 50px 50px;
+}
+
+.fileLabel {
+  color:#ffffff;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+}
+.fileInput {
+  background-color:transparent;
+  border:1px #fff solid;
+  color:#fafafa;
+  border-bottom:1px solid #fbfbfb; 
+}
+.table_body_scrollable {
+  padding:0px;
+  margin: 0px;
+}
+
+.logoSection {
+  display: flex;
+  color: #fbfbfb;
+  justify-content: center;
+}
+
+.content-container {
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.content-container div {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.content-container p {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.hashHover:hover {
+  cursor: pointer;
+  color:rgb(63, 63, 199);
+  font-weight: 600;
+}
+
+.productsArea {
+  display: flex;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  justify-content: space-between;
+}
+
+.screenCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  margin-right: 50px;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  padding: 20px 0;
+}
+
+.productsArea .screenCard:last-child {
+  margin-right: 0; 
+}
+
+.screenTitleLabel {
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.screenDescription {
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.screenMoreButton {
+  width: 90%;
+  margin-right: 20px !important;
+}
+
+.screenBuyButton {
+  width: 90%;
+}
+
+.screenButtonSection {
+  display: flex;
+  width: 80%;
+}
+
+.modalCotentInfoLabel {
+  display: flex;
+}
+
+.productsInclusiveInfoSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.productsInclusiveInfo {
+  width: 33%;
+  border-top: 3px solid;
+  text-align: left;
+  padding: 10px
+}
+
+.productsInclusiveInfo p {
+  margin-bottom: 0px;
+}
+
+.productsInclusiveInfo p:first-child {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.appIconSection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.appIconSection p {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.appIconSection div {
+  display: flex;
+}
+
+.appIconSection img {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.appIconSection img:first-child {
+  margin-right: 20px;
+}
+
+.footer {
+  padding-bottom: 30px;
+}
+
+.footer a {
+  cursor: pointer;
+}
