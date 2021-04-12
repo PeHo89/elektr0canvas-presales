@@ -101,6 +101,10 @@
   width: 80%;
 }
 
+.salesModalButtonSection {
+  display: flex;
+}
+
 .modalCotentInfoLabel {
   display: flex;
 }

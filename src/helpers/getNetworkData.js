@@ -65,6 +65,41 @@ export const getNetworkConnectors = () => {
           // },
         },
       };
+    case '97': // bsc testnet
+      return {
+        network: 'binance',
+        cacheProvider: true,
+        providerOptions: {
+          injected: {
+            display: {
+              name: 'Injected',
+              description: 'Home-BrowserWallet',
+            },
+          },
+          walletconnect: {
+            package: WalletConnectProvider,
+            options: {
+              rpc: {
+                1: 'https://bsc-dataseed.binance.org/',
+                56: 'https://bsc-dataseed.binance.org/',
+              },
+            },
+          },
+          'custom-binance': {
+            display: {
+              name: 'Binance',
+              description: 'Binance Chain Wallet',
+              logo: require(`../images/wallets/binance-wallet.png`),
+            },
+            package: 'binance',
+            connector: async (ProviderPackage, options) => {
+              const provider = window.BinanceChain;
+              await provider.enable();
+              return provider;
+            },
+          },
+        },
+      };
     default:
       return {};
   }

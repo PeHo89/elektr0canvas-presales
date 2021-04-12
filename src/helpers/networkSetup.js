@@ -18,8 +18,8 @@ const networkSettings = {
 			symbol: 'BNB',
 			decimals: 18,
 		},
-		rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org'],
-		blockExplorerUrls: ['https://testnet.bscscan.com/'],
+		rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+		blockExplorerUrls: ['https://explorer.binance.org/smart-testnet'],
 	},
 	// '128': {
 	// 	chainId: '0x80',
