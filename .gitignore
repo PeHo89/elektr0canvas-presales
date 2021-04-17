@@ -1,5 +1,9 @@
 package-lock.json
 yarn.lock
+.env
 
 build
 node_modules
+env
+venv
+
