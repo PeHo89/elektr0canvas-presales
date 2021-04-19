@@ -113,6 +113,8 @@ def register_buyer(request):
     phone = json_data["phone"]
     frame = json_data["frame"]
 
+    f = Frame.objects.get(pk=int(frame))
+
     b = Buyer(
         email=email,
         first_name=first_name,
@@ -124,8 +126,11 @@ def register_buyer(request):
         country=country,
         zip_code=zip_code,
         phone=phone,
-        frame=Frame.objects.get(pk=int(frame))
+        frame=f
     )
     b.save()
+
+    f.balance = f.balance - 1
+    f.save()
 
     return Response({"success": True})
