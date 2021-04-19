@@ -6,7 +6,7 @@ const showModal = (props) => {
         <Modal open={props.modalOpen} size="small">
             <Modal.Header>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <p>Canva 24"</p>
+                    <p>{props.frameData.title}</p>
                     <p style={{cursor:'pointer'}} onClick={props.modalClose}>&#10005;</p>
                 </div>
             </Modal.Header>
@@ -18,12 +18,12 @@ const showModal = (props) => {
                         <p>Price</p>
                     </div>
                     <div style={{display: 'block'}}>
-                        <p>42"(457mm x 304mm)</p>
-                        <p>balfkfdlafd</p>
-                        <p>1 BNB</p>
+                        <p>{props.frameData.size}" ({props.frameData.size_mm})</p>
+                        <p>{props.frameData.category}</p>
+                        <p>{props.frameData.price} BNB</p>
                     </div>
                 </div>
-                < Image src="/img/detail_img.png" size='medium' style={{ marginLeft: '25%' }} />
+                <Image src="/img/detail_img.png" size='medium' style={{ marginLeft: '25%' }} />
             </Modal.Content>
         </Modal>
     );

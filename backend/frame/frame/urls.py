@@ -15,15 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import url
 from rest_framework import routers
-from frame_manager import views
+from frame_manager import views as frame_manager_views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'users', frame_manager_views.UserViewSet)
+router.register(r'groups', frame_manager_views.GroupViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^get_frames$', frame_manager_views.get_frames, name='get_frames'),
+    url(r'^verify_code$', frame_manager_views.verify_code, name='verify_code'),
+    url(r'^verify_email$', frame_manager_views.verify_email, name='verify_email'),
+    url(r'^register_buyer$', frame_manager_views.register_buyer, name='register_buyer'),
 ]

@@ -7,20 +7,12 @@ class ScreenCard extends React.Component {
         return (
             <div className="screenCard">
                 <Image src='/img/product_main_image.png' size='small' />
-                <p className="screenTitleLabel">Canva_24"</p>
-                <p className="screenDescription">Lorem ipsum dolor sit amet, consectetur adipiscinit uielaidl ... </p>
-                <p className="screenDescription">150 left</p>
+                <p className="screenTitleLabel">{this.props.frame.title}</p>
+                <p className="screenDescription">{this.props.frame.description}</p>
+                <p className="screenDescription">{this.props.frame.balance} left</p>
                 <div className="screenButtonSection">
-                    <Button className="screenMoreButton" onClick={this.props.openModal}>More</Button>
-                    <Button primary className="screenBuyButton" onClick={ () => this.props.openSalesModal(
-                        {
-                            title: 'canva 24"',
-                            size: 24,
-                            category: "balfkfdlafd",
-                            price: 1,
-                            image: "/img/detail_img.png"
-                        }
-                    ) }>1 Ξ Buy</Button>
+                    <Button className="screenMoreButton" onClick={() => this.props.openModal(this.props.frame)}>More</Button>
+                    <Button primary className="screenBuyButton" onClick={ () => this.props.openSalesModal(this.props.frame) }>{this.props.frame.price} Ξ Buy</Button>
                 </div>
             </div>
         )
