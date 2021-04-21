@@ -112,13 +112,13 @@ export class Layout extends Component {
 								<Image src="/img/download_google_play.png" />
 							</div>
 					</div>
-					<div className="content-container">
+					{/* <div className="content-container">
 							<div>
 								<p>Invoices</p>
 								<Button basic color='blue'>Download</Button>
 							</div>
 							<TableList />
-					</div>
+					</div> */}
 				</div>
 				<div className="footer">
 					<a href="#Imprint">Imprint</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;

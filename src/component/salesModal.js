@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image, Modal, Button, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { getFrames } from '../actions/frame';
 
 export class SalesModal extends Component {
 	constructor(props) {
@@ -214,6 +215,7 @@ export class SalesModal extends Component {
 		.then(res => {
 			alert("Successfully Ordered!");
 			this.props.modalClose();
+			this.props.getFrames();
 		})
 		.catch(error => {
 			alert("The order is failed!");
@@ -373,4 +375,10 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(SalesModal);
+const mapDispatchToProps = dispatch => {
+	return {
+		getFrames: () => dispatch(getFrames())
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SalesModal);
