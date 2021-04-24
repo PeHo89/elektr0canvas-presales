@@ -6,7 +6,7 @@ class ScreenCard extends React.Component {
     render() {
         return (
             <div className="screenCard">
-                <Image src='/img/product_main_image.png' size='small' />
+                <Image src='/static/images/product_main_image.png' size='small' />
                 <p className="screenTitleLabel">{this.props.frame.title}</p>
                 <p className="screenDescription">{this.props.frame.description}</p>
                 <p className="screenDescription">{this.props.frame.balance} left</p>

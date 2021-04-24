@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from django.core import serializers
+from django.views.generic import TemplateView
 
 from frame_manager.serializers import UserSerializer, GroupSerializer
 from .models import *
@@ -29,6 +30,9 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+catchall = TemplateView.as_view(template_name='index.html')
 
 
 @api_view(['GET'])

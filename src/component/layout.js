@@ -79,7 +79,7 @@ export class Layout extends Component {
 					frameData={this.state.selectedFrame}
 				/>
 				<div className="logoSection">
-					<Image src="/img/elektr0canvas.png" height="160px" width="450px" />
+					<Image src="/static/images/elektr0canvas.png" height="160px" width="450px" />
 				</div>
 				<div className="table_body_scrollable">
 					<Form>
@@ -108,8 +108,8 @@ export class Layout extends Component {
 					<div className="appIconSection">
 							<p>Apps soon available</p>
 							<div>
-								<Image src="/img/download_apple_store.png" />
-								<Image src="/img/download_google_play.png" />
+								<Image src="/static/images/download_apple_store.png" />
+								<Image src="/static/images/download_google_play.png" />
 							</div>
 					</div>
 					{/* <div className="content-container">

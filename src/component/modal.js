@@ -23,7 +23,7 @@ const showModal = (props) => {
                         <p>{props.frameData.price} BNB</p>
                     </div>
                 </div>
-                <Image src="/img/detail_img.png" size='medium' style={{ marginLeft: '25%' }} />
+                <Image src="/static/images/detail_img.png" size='medium' style={{ marginLeft: '25%' }} />
             </Modal.Content>
         </Modal>
     );

@@ -246,7 +246,7 @@ export class SalesModal extends Component {
 									<p>{this.props.frameData.price} BNB</p>
 								</div>
 							</div>
-							<Image src="/img/detail_img.png" size='medium' />
+							<Image src="/static/images/detail_img.png" size='medium' />
 						</div>
 						<div style={{width: "50%"}}>
 							<Form>

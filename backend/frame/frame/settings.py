@@ -21,7 +21,8 @@ if os.path.isfile(env_path):
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+BACKEND_DIR = BASE_DIR  # rename variable for clarity
+FRONTEND_DIR = BACKEND_DIR.parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -65,7 +66,7 @@ ROOT_URLCONF = 'frame.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(FRONTEND_DIR, 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,6 +131,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [os.path.join(FRONTEND_DIR, 'build', 'static')]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/images/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+#dev
+STATIC_PATH = os.path.join(BASE_DIR, "static") + '/images/'
+
+# pro
+# STATIC_PATH = os.path.join(BASE_DIR, "static") + '/images/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -142,6 +157,8 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:5000",
+    "http://192.168.0.153:5000"
 ]
 
 SITE_NAME="elektr0canvas.com"
