@@ -158,7 +158,9 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5000",
-    "http://192.168.0.153:5000"
+    "http://192.168.0.153:5000",
+    "http://0.0.0.0:8000",
+    "http://ec2-35-178-44-5.eu-west-2.compute.amazonaws.com"
 ]
 
 SITE_NAME="elektr0canvas.com"
