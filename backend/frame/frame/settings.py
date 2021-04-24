@@ -169,5 +169,5 @@ EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_HOST_USER = os.getenv("EMAIL_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
-EMAIL_USE_TLS = bool(int(os.getenv("EMAIL_TLS")))
+EMAIL_USE_TLS = 1
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_FROM")
