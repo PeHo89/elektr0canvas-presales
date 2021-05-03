@@ -97,7 +97,7 @@ def verify_email(request):
             )
             e.save()
         print(code)
-        # send_verification_code_email(email, code)
+        send_verification_code_email(email, code)
         return Response({"verified": False})
 
 

@@ -52,13 +52,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'frame.urls'
@@ -158,6 +158,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5000",
+    "http://localhost:8000",
     "http://192.168.0.153:5000",
     "http://0.0.0.0:8000",
     "http://ec2-35-178-44-5.eu-west-2.compute.amazonaws.com"
@@ -165,9 +166,15 @@ CORS_ALLOWED_ORIGINS = [
 
 SITE_NAME="elektr0canvas.com"
 
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_HOST_USER = os.getenv("EMAIL_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
-EMAIL_USE_TLS = 1
-DEFAULT_FROM_EMAIL = os.getenv("EMAIL_FROM")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'sandybux99@gmail.com'
+EMAIL_HOST_PASSWORD = 'nkrloozholbdgyhs'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'elektr0canvas@gmail.com'
+
+
+#EMAIL_HOST = 'smtp.mandrillapp.com'
+#EMAIL_HOST_USER = 'elektr0canvas.io'
+#EMAIL_HOST_PASSWORD = 'N-ERNDtUJMapaiFsfBM50w'
