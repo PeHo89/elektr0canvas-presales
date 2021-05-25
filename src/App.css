@@ -94,6 +94,13 @@
 
 .screenBuyButton {
   width: 90%;
+  border: 1px solid #000000 !important;
+}
+
+.screenBuyButton:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000;
 }
 
 .screenButtonSection {
@@ -120,7 +127,6 @@
 
 .productsInclusiveInfo {
   width: 33%;
-  border-top: 3px solid;
   text-align: left;
   padding: 10px
 }
@@ -163,9 +169,18 @@
 }
 
 .footer {
-  padding-bottom: 30px;
+  padding: 15px;
+  background-color: black;
+  color: white;
 }
 
 .footer a {
   cursor: pointer;
+  text-transform: uppercase;
+  color: white;
+}
+
+.footer div {
+  display: flex;
+  justify-content: center;
 }

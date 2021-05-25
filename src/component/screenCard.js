@@ -12,7 +12,7 @@ class ScreenCard extends React.Component {
                 <p className="screenDescription">{this.props.frame.balance} left</p>
                 <div className="screenButtonSection">
                     <Button className="screenMoreButton" onClick={() => this.props.openModal(this.props.frame)}>More</Button>
-                    <Button primary className="screenBuyButton" onClick={ () => this.props.openSalesModal(this.props.frame) }>{this.props.frame.price} Ξ Buy</Button>
+                    <Button secondary className="screenBuyButton" onClick={ () => this.props.openSalesModal(this.props.frame) }>{this.props.frame.price} Ξ Buy</Button>
                 </div>
             </div>
         )

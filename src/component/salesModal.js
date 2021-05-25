@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Image, Modal, Button, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import ConfettiExplosion from '@reonomy/react-confetti-explosion';
+
 import { getFrames } from '../actions/frame';
 
 export class SalesModal extends Component {
@@ -30,7 +32,8 @@ export class SalesModal extends Component {
 			countryError: false,
 			zipCodeError: false,
 
-			existCodeInput: false
+			existCodeInput: false,
+			isExploding: false
     }
 	}
 
@@ -122,6 +125,31 @@ export class SalesModal extends Component {
     }
 	}
 
+	resendCode = (e) => {
+		e.preventDefault();
+		if (this.state.email === "") {
+			alert("Please input the email!");
+			return;
+		}
+
+		axios.post(
+			`${process.env.REACT_APP_API_URL}/resend_code`, 
+			{
+				email: this.state.email,
+			}
+		)
+		.then(res => {
+			if (!res.data.status) {
+				alert("We re-sent a new code!");
+			} else {
+				alert("Server error!");
+			}
+		})
+		.catch(error => {
+			console.log("error");
+		});
+	}
+
 	verifyCode = (email, code) => {
 		axios.post(
 			`${process.env.REACT_APP_API_URL}/verify_code`, 
@@ -159,7 +187,6 @@ export class SalesModal extends Component {
 				this.setState({
 					existCodeInput: true
 				});
-				alert(`Input the verification code we sent to ${this.state.email}.`);
 				return;
 			}
 		})
@@ -213,9 +240,13 @@ export class SalesModal extends Component {
 			}
 		)
 		.then(res => {
-			alert("Successfully Ordered!");
-			this.props.modalClose();
-			this.props.getFrames();
+			this.setState({
+				isExploding: true
+			});
+			setTimeout(() => {
+				this.props.modalClose();
+				this.props.getFrames();
+			}, 4000);
 		})
 		.catch(error => {
 			alert("The order is failed!");
@@ -260,18 +291,19 @@ export class SalesModal extends Component {
 									onChange={(e) => this.setState({email: e.target.value})}
 									error={this.state.emailError}
 								/>
-								<Form.Group widths='equal' style={this.state.existCodeInput ? {} : {display: "none"}}>
-									<Form.Input
-										fluid
-										id='form-subcomponent-shorthand-input-code'
-										label='Verification code'
-										placeholder='Verification code'
-										required={true}
-										onChange={(e) => this.setState({code: e.target.value})}
-										error={this.state.codeError}
-									/>
-									<Button className="screenMoreButton" style={{visibility: "hidden"}}>Resend</Button>
-								</Form.Group>
+								<div style={this.state.existCodeInput ? {} : {display: "none"}}>
+									<div style={{color: "coral", 'marginBottom': '10px'}}>Input the verification code we sent to {this.state.email}.</div>
+									<Form.Group widths='equal'>
+										<Form.Input
+											fluid
+											id='form-subcomponent-shorthand-input-code'
+											placeholder='Verification code'
+											onChange={(e) => this.setState({code: e.target.value})}
+											error={this.state.codeError}
+										/>
+										<Button secondary className="screenBuyButton" onClick={(event) => { this.resendCode(event) }}>Resend</Button>
+									</Form.Group>
+								</div>
 								<h4 className="ui dividing header">Shipping Information</h4>
 								<Form.Group widths='equal'>
 									<Form.Input
@@ -293,6 +325,9 @@ export class SalesModal extends Component {
 										error={this.state.lastNameError}
 									/>
 								</Form.Group>
+								{this.state.isExploding && <ConfettiExplosion 
+									duration = "4000"
+								/>}
 								<Form.Input
 									fluid
 									id='form-subcomponent-shorthand-input-company'
@@ -300,24 +335,15 @@ export class SalesModal extends Component {
 									placeholder='Company'
 									onChange={(e) => this.setState({company: e.target.value})}
 								/>
-								<Form.Group widths='equal'>
-									<Form.Input
-										fluid
-										id='form-subcomponent-shorthand-address1'
-										label='Street number'
-										placeholder='Street and house number'
-										required={true}
-										onChange={(e) => this.setState({address1: e.target.value})}
-										error={this.state.address1Error}
-									/>
-									<Form.Input
-										fluid
-										id='form-subcomponent-shorthand-input-address2'
-										label='Additional address'
-										placeholder='Additional address'
-										onChange={(e) => this.setState({address2: e.target.value})}
-									/>
-								</Form.Group>
+								<Form.Input
+									fluid
+									id='form-subcomponent-shorthand-address1'
+									label='Street and house number'
+									placeholder='Street and house number'
+									required={true}
+									onChange={(e) => this.setState({address1: e.target.value})}
+									error={this.state.address1Error}
+								/>
 								<Form.Group widths='equal'>
 									<Form.Input
 										fluid
@@ -361,8 +387,9 @@ export class SalesModal extends Component {
 					</div>
 					<div className="salesModalButtonSection">
 						<Button className="screenMoreButton" onClick={this.props.modalClose} style={{width: "20%"}}>Cancel</Button>
-						<Button primary className="screenBuyButton" onClick={() => { this.handleSubmit() }} style={{width: "20%"}}>{this.props.frameData.price} Ξ Buy</Button>
+						<Button secondary className="screenBuyButton" onClick={() => { this.handleSubmit() }} style={{width: "20%"}}>{this.props.frameData.price} Ξ Buy</Button>
 					</div>
+					
 				</Modal.Content>
 			</Modal>
 		);

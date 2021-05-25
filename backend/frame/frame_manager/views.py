@@ -100,6 +100,22 @@ def verify_email(request):
         send_verification_code_email(email, code)
         return Response({"verified": False})
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def resend_code(request):
+    json_data = json.loads(request.body)
+    email = json_data["email"]
+    code = generate_code(6)
+    try:
+        e = Email.objects.get(email=email)
+        e.code = code
+        e.save()
+        print(code)
+        send_verification_code_email(email, code)
+        return Response({"verified": False})
+    except Email.DoesNotExist:
+        return Response({"status": "error"})
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])

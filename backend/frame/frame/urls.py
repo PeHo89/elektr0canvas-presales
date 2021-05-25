@@ -30,6 +30,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^get_frames$', frame_manager_views.get_frames, name='get_frames'),
     url(r'^verify_code$', frame_manager_views.verify_code, name='verify_code'),
+    url(r'^resend_code$', frame_manager_views.resend_code, name='resend_code'),
     url(r'^verify_email$', frame_manager_views.verify_email, name='verify_email'),
     url(r'^register_buyer$', frame_manager_views.register_buyer, name='register_buyer'),
     re_path(r'', frame_manager_views.catchall),
