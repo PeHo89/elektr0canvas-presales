@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Button, Form } from 'semantic-ui-react';
+import { Image, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Web3Modal from "web3modal";
 import { getNetworkConnectors } from '../helpers/getNetworkData';
@@ -7,7 +7,6 @@ import { connectWallet } from '../actions/home';
 import { getFrames } from '../actions/frame';
 import { networkSetup } from '../helpers/networkSetup';
 import ScreenCard from '../component/screenCard';
-import TableList from './tableList';
 import ShowModal from './modal';
 import SalesModal from './salesModal';
 import '../App.css';
@@ -24,7 +23,8 @@ export class Layout extends Component {
 				category: "",
 				price: 0,
 				image: "",
-			}
+			},
+			isCongratulationModal: false
 		}
 	}
 
@@ -39,12 +39,13 @@ export class Layout extends Component {
 		});
 	}
 
-	openModal = (frame) => {
+	openModal = (frame, isCongratulationModal) => {
 		this.setState({
 			modalOpen: true,
 			selectedFrame: {
 				...frame
-			}
+			},
+			isCongratulationModal
 		});
 	}
 
@@ -73,14 +74,28 @@ export class Layout extends Component {
 						modalOpen={this.state.modalOpen}
 						modalClose={this.closeModal}
 						frameData={this.state.selectedFrame}
+						isCongratulationModal={this.state.isCongratulationModal}
 					/>
 					<SalesModal 
 						modalOpen={this.state.salesModalOpen}
 						modalClose={this.closeSalesModal}
 						frameData={this.state.selectedFrame}
+						openMoreModal={this.openModal}
 					/>
 					<div className="logoSection">
-						<Image src="/static/images/elektr0canvas.png" height="160px" width="450px" />
+						<Image src="/static/images/elektr0canvas.png" height="160px" width="335px" />
+						{ this.props.home.web3 &&
+							<div className="connection">
+								<div className="connectionStatus"></div>
+								<div className="connectionText">Connected</div>
+							</div>
+						}
+						{ !this.props.home.web3 &&
+							<div className="connection">
+								<div className="disconnectionStatus"></div>
+								<div className="disconnectionText">Disconnected</div>
+							</div>
+						}
 					</div>
 					<div className="table_body_scrollable">
 						<Form>

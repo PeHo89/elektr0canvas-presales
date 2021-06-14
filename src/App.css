@@ -3,7 +3,6 @@
 }
 
 .layoutBG {
-  height:100vh;
   width:100vw;
   padding:0 50px 50px 50px;
 }
@@ -51,6 +50,18 @@
   cursor: pointer;
   color:rgb(63, 63, 199);
   font-weight: 600;
+}
+
+@media screen and (max-width: 800px) {
+  .productsArea {
+    display: block !important;
+  }
+
+  .screenCard {
+    margin-right: 0px !important;
+    margin-bottom: 40px;
+    width: 100% !important;
+  }
 }
 
 .productsArea {
@@ -101,6 +112,17 @@
   background-color: #ffffff !important;
   color: #000000 !important;
   border: 1px solid #000000;
+}
+
+.screenResendButton {
+  border: none !important;
+  background: white !important;
+  color: #2C46C7 !important;
+  cursor: pointer;
+}
+
+.screenResendButton:hover {
+  text-decoration: underline !important;
 }
 
 .screenButtonSection {
@@ -183,4 +205,47 @@
 .footer div {
   display: flex;
   justify-content: center;
+}
+
+.connection {
+  position: absolute;
+  display: flex;
+  right: 30px;
+  top: 65px;
+}
+
+.connectionStatus {
+  width: 20px;
+  height: 20px;
+  background: #4cd964;
+  border-radius: 50%;
+}
+
+.connectionText {
+  margin-left: 10px;
+  color: #4cd964;
+}
+
+.disconnectionStatus {
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50%;
+}
+
+.disconnectionText {
+  margin-left: 10px;
+  color: red;
+}
+
+.thanks-text {
+  margin-top: 20px;
+  text-align: center;
+  color: green;
+}
+
+div[class*="ConfettiExplosion-container"] {
+  position: absolute;
+  top: 30%;
+  left: 50%;
 }

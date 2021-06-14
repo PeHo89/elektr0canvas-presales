@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Image, Modal, Button, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import ConfettiExplosion from '@reonomy/react-confetti-explosion';
 
 import { getFrames } from '../actions/frame';
 
@@ -33,7 +32,6 @@ export class SalesModal extends Component {
 			zipCodeError: false,
 
 			existCodeInput: false,
-			isExploding: false
     }
 	}
 
@@ -240,13 +238,9 @@ export class SalesModal extends Component {
 			}
 		)
 		.then(res => {
-			this.setState({
-				isExploding: true
-			});
-			setTimeout(() => {
-				this.props.modalClose();
-				this.props.getFrames();
-			}, 4000);
+			this.props.modalClose();
+			this.props.openMoreModal(this.props.frameData, true);
+			this.props.getFrames();
 		})
 		.catch(error => {
 			alert("The order is failed!");
@@ -301,7 +295,7 @@ export class SalesModal extends Component {
 											onChange={(e) => this.setState({code: e.target.value})}
 											error={this.state.codeError}
 										/>
-										<Button secondary className="screenBuyButton" onClick={(event) => { this.resendCode(event) }}>Resend</Button>
+										<Button secondary className="screenResendButton" onClick={(event) => { this.resendCode(event) }}>Resend</Button>
 									</Form.Group>
 								</div>
 								<h4 className="ui dividing header">Shipping Information</h4>
@@ -325,9 +319,6 @@ export class SalesModal extends Component {
 										error={this.state.lastNameError}
 									/>
 								</Form.Group>
-								{this.state.isExploding && <ConfettiExplosion 
-									duration = "4000"
-								/>}
 								<Form.Input
 									fluid
 									id='form-subcomponent-shorthand-input-company'

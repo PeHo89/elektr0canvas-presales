@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.3e3e01c4.chunk.css",
-    "main.js": "/static/js/main.a70d634b.chunk.js",
-    "main.js.map": "/static/js/main.a70d634b.chunk.js.map",
+    "main.css": "/static/css/main.0b2916eb.chunk.css",
+    "main.js": "/static/js/main.6fab4cf8.chunk.js",
+    "main.js.map": "/static/js/main.6fab4cf8.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.70b9a011.js",
     "runtime~main.js.map": "/static/js/runtime~main.70b9a011.js.map",
-    "static/js/2.4eddcfd0.chunk.js": "/static/js/2.4eddcfd0.chunk.js",
-    "static/js/2.4eddcfd0.chunk.js.map": "/static/js/2.4eddcfd0.chunk.js.map",
+    "static/js/2.1e285941.chunk.js": "/static/js/2.1e285941.chunk.js",
+    "static/js/2.1e285941.chunk.js.map": "/static/js/2.1e285941.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.27cf1985f500695c59865928dc499132.js": "/precache-manifest.27cf1985f500695c59865928dc499132.js",
+    "precache-manifest.dfdb68ef90f4c62b24ff6afd381dcd08.js": "/precache-manifest.dfdb68ef90f4c62b24ff6afd381dcd08.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.3e3e01c4.chunk.css.map": "/static/css/main.3e3e01c4.chunk.css.map",
+    "static/css/main.0b2916eb.chunk.css.map": "/static/css/main.0b2916eb.chunk.css.map",
     "static/media/binance-wallet.png": "/static/media/binance-wallet.745a9935.png"
   }
 }
