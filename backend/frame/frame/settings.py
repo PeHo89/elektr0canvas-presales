@@ -170,7 +170,8 @@ SITE_NAME="elektr0canvas.com"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'elektr0canvas@gmail.com'
+DEFAULT_FROM_EMAIL = 'sales@elektr0canvas.io'
 EMAIL_HOST = ''
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
+

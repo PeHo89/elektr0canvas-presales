@@ -13,7 +13,7 @@ from django.views.generic import TemplateView
 from frame_manager.serializers import UserSerializer, GroupSerializer
 from .models import *
 from .helpers import *
-from .tasks import verify_tx_hash
+from .tasks import verify_tx
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -158,7 +158,7 @@ def add_tx_hash_to_buyer(request):
     b.tx_hash = tx_hash
     b.save()
 
-    verify_tx_hash(order_id)
+    verify_tx(order_id)
 
     return Response({"success": True})
 

@@ -161,7 +161,7 @@ export class SalesModal extends Component {
 				this.setState({
 					existCodeInput: false
 				});
-				this.transferAndRegisterBuyer();
+				this.registerBuyer();
 			} else {
 				alert("The code is incorrect. Please input the correct one!");
 			}
@@ -180,7 +180,7 @@ export class SalesModal extends Component {
 		)
 		.then(res => {
 			if (res.data.verified) {
-				this.transferAndRegisterBuyer();
+				this.registerBuyer();
 			} else {
 				this.setState({
 					existCodeInput: true
@@ -193,19 +193,20 @@ export class SalesModal extends Component {
 		});
 	}
 
-	transferAndRegisterBuyer = () => {
+	transferAndAddTxHashToBuyer = (orderId) => {
 		if (this.props.home.web3) {
 			var web3 = this.props.home.web3;
 			web3.eth.sendTransaction({
 				from: this.props.home.address,
 				to: process.env.REACT_APP_TO_ADDRESS,
-				value: (this.props.frameData.price * Math.pow(10, 18)).toString()
+				value: (this.props.frameData.price * Math.pow(10, 18)).toString(),
+				data: web3.utils.utf8ToHex(orderId)
 			})
-			.on('transactionHash', (hash) => {
-				this.registerBuyer();
+			.on('transactionHash', (txHash) => {
+				this.addTxHashToBuyer(orderId, txHash);
 			})
 			.on('receipt', function(receipt) {
-				console.log(receipt);
+				// console.log(receipt);
 			})
 			.on('confirmation', function(confirmationNumber, receipt) { 
 				// console.log(confirmationNumber);
@@ -220,9 +221,30 @@ export class SalesModal extends Component {
 		}
 	}
 
+	addTxHashToBuyer = (orderId, txHash) => {
+		axios.put(
+			`${process.env.REACT_APP_API_URL}/add_tx_hash_to_buyer`,
+			{
+				order_id: orderId,
+				tx_hash: txHash,
+			}
+		)
+		.then(res => {
+			if (res.data.success) {
+				this.props.modalClose();
+				this.props.openMoreModal(this.props.frameData, true);
+				this.props.getFrames();
+			}
+		})
+		.catch(error => {
+			console.log(error);
+			alert("The order is failed!");
+		});
+	}
+
 	registerBuyer = () => {
 		axios.post(
-			`${process.env.REACT_APP_API_URL}/register_buyer`, 
+			`${process.env.REACT_APP_API_URL}/register_buyer`,
 			{
 				email: this.state.email,
 				first_name: this.state.firstName,
@@ -238,11 +260,12 @@ export class SalesModal extends Component {
 			}
 		)
 		.then(res => {
-			this.props.modalClose();
-			this.props.openMoreModal(this.props.frameData, true);
-			this.props.getFrames();
+			if (res.data.success) {
+				this.transferAndAddTxHashToBuyer(res.data.data.order_id)
+			}
 		})
 		.catch(error => {
+			console.log(error);
 			alert("The order is failed!");
 		});
 	}

@@ -1,8 +1,12 @@
 from web3 import Web3
+from eth_utils import to_text
 
 # todo configure provider
 w3 = Web3(Web3.HTTPProvider(''))
 
 
-def get_tx(tx_hash: str):
-    return w3.eth.get_transaction(tx_hash)
+def get_tx_data_and_receiver(tx_hash: str):
+    tx = w3.eth.get_transaction(tx_hash)
+    data = tx.input
+    receiver = tx.to
+    return to_text(data), receiver
