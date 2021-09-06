@@ -1,18 +1,20 @@
 import json
 
-from django.shortcuts import render
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User, Group
+from rest_framework import status
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
-from django.core import serializers
 from django.views.generic import TemplateView
 
 from frame_manager.serializers import UserSerializer, GroupSerializer
 from .models import *
 from .helpers import *
+from .tasks import verify_tx_hash
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -117,6 +119,50 @@ def resend_code(request):
         return Response({"status": "error"})
 
 
+@api_view(['PUT'])
+@permission_classes([AllowAny])
+def add_tx_hash_to_buyer(request):
+    err_response = Response({"success": False}, status=status.HTTP_400_BAD_REQUEST)
+
+    json_data = json.loads(request.body)
+    order_id = json_data["order_id"]
+    tx_hash = json_data["tx_hash"]
+
+    # buyer with order_id must exist
+    try:
+        b = Buyer.objects.get(order_id=order_id)
+    except (Buyer.DoesNotExist, ValidationError):
+        return err_response
+
+    # buyer must not already have a tx_hash
+    if b.tx_hash is not None and len(b.tx_hash) != 0:
+        return err_response
+
+    # tx_hash must be 66 character ('0x' + 32 bytes)
+    if len(tx_hash) != 66:
+        return err_response
+
+    # tx_hash must be a hex value
+    try:
+        int(tx_hash, base=16)
+    except ValueError:
+        return err_response
+
+    # tx_hash must not be already used
+    try:
+        Buyer.objects.get(tx_hash=tx_hash)
+        return err_response
+    except Buyer.DoesNotExist:
+        pass
+
+    b.tx_hash = tx_hash
+    b.save()
+
+    verify_tx_hash(order_id)
+
+    return Response({"success": True})
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register_buyer(request):
@@ -153,4 +199,8 @@ def register_buyer(request):
     f.balance = f.balance - 1
     f.save()
 
-    return Response({"success": True})
+    data = {
+        "order_id": b.order_id,
+    }
+
+    return Response({"success": True, "data": data})

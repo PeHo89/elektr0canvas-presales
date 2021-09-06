@@ -33,5 +33,6 @@ urlpatterns = [
     url(r'^resend_code$', frame_manager_views.resend_code, name='resend_code'),
     url(r'^verify_email$', frame_manager_views.verify_email, name='verify_email'),
     url(r'^register_buyer$', frame_manager_views.register_buyer, name='register_buyer'),
+    url(r'^add_tx_hash_to_buyer$', frame_manager_views.add_tx_hash_to_buyer, name='add_tx_hash_to_buyer'),
     re_path(r'', frame_manager_views.catchall),
 ]

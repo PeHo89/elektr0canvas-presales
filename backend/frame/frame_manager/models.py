@@ -1,11 +1,13 @@
+import uuid
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
+
 
 class Frame(models.Model):
     title = models.CharField(max_length=50)
     size = models.IntegerField()
     size_mm = models.CharField(max_length=50, null=True, blank=True)
-    category = models.CharField(max_length=200, null=True, blank=True, default="category text here")
+    category = models.CharField(max_length=200, null=True, blank=True)
     price = models.FloatField()
     description = models.TextField()
     main_image = models.TextField(null=True, blank=True)
@@ -14,6 +16,7 @@ class Frame(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Buyer(models.Model):
     email = models.CharField(max_length=200)
@@ -27,7 +30,10 @@ class Buyer(models.Model):
     country = models.CharField(max_length=100)
     phone = models.CharField(max_length=50, null=True, blank=True)
     frame = models.ForeignKey(Frame, on_delete=models.CASCADE)
-    order_date = models.DateTimeField(default=datetime.now)
+    order_date = models.DateTimeField(default=timezone.now)
+    order_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    tx_hash = models.CharField(max_length=66, null=True, blank=True)
+    tx_confirmed = models.BooleanField(default=False)
 
     def __str__(self):
         return "{} {} ({})".format(
@@ -35,6 +41,7 @@ class Buyer(models.Model):
             self.last_name,
             self.email
         )
+
 
 class Email(models.Model):
     email = models.CharField(max_length=200)
