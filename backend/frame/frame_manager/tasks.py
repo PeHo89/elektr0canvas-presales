@@ -5,7 +5,7 @@ from .models import Buyer
 RECEIVER = ''
 
 
-@background(schedule=30)
+@background(schedule=60*10)
 def verify_tx(order_id):
     try:
         b = Buyer.objects.get(order_id=order_id)
