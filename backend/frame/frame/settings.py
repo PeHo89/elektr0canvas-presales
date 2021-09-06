@@ -167,14 +167,9 @@ CORS_ALLOWED_ORIGINS = [
 SITE_NAME="elektr0canvas.com"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'sandybux99@gmail.com'
-EMAIL_HOST_PASSWORD = 'nkrloozholbdgyhs'
-EMAIL_USE_TLS = True
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'elektr0canvas@gmail.com'
-
-
-#EMAIL_HOST = 'smtp.mandrillapp.com'
-#EMAIL_HOST_USER = 'elektr0canvas.io'
-#EMAIL_HOST_PASSWORD = 'N-ERNDtUJMapaiFsfBM50w'
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
