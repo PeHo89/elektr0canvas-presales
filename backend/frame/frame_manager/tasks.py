@@ -1,8 +1,13 @@
+import os
+
+from dotenv import load_dotenv
 from background_task import background
 from .web3 import get_tx_data_and_receiver
 from .models import Buyer
 
-RECEIVER = ''
+load_dotenv(dotenv_path=os.path.join(os.getcwd(), '..', '..', '.env'))
+
+TO_ADDRESS = os.getenv('REACT_APP_TO_ADDRESS')
 
 
 @background(schedule=60*10)
@@ -15,7 +20,7 @@ def verify_tx(order_id):
     order_id = str(b.order_id)
     tx_data_and_receiver = get_tx_data_and_receiver(b.tx_hash)
 
-    if order_id == tx_data_and_receiver[0] and RECEIVER == tx_data_and_receiver[1]:
+    if order_id == tx_data_and_receiver[0] and TO_ADDRESS == tx_data_and_receiver[1]:
         print(f'order {order_id} confirmed')
         b.tx_confirmed = True
         b.save()

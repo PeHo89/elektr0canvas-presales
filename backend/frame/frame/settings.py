@@ -14,10 +14,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-env_path = Path('.') / '.env'
-# default to the example if the .env doesn't exist
-if os.path.isfile(env_path):
-    load_dotenv(dotenv_path=env_path)
+load_dotenv(dotenv_path=os.path.join(os.getcwd(), '..', '..', '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +25,7 @@ FRONTEND_DIR = BACKEND_DIR.parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ah20z10+=r$=omy#y2b=q^_ynm+9-_nkpa=^3ux%ebtkmo7dlr'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -87,9 +84,17 @@ WSGI_APPLICATION = 'frame.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -168,10 +173,10 @@ CORS_ALLOWED_ORIGINS = [
 SITE_NAME="elektr0canvas.com"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'sales@elektr0canvas.io'
-EMAIL_HOST = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_SSL = True
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
