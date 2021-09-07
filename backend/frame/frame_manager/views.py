@@ -98,7 +98,6 @@ def verify_email(request):
                 code=code
             )
             e.save()
-        print(code)
         send_verification_code_email(email, code)
         return Response({"verified": False})
 
@@ -112,7 +111,6 @@ def resend_code(request):
         e = Email.objects.get(email=email)
         e.code = code
         e.save()
-        print(code)
         send_verification_code_email(email, code)
         return Response({"verified": False})
     except Email.DoesNotExist:

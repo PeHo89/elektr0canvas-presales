@@ -18,7 +18,7 @@ def send_email(recipient, subject, body):
         email.send()
 
         ret_msg = "Message sent to {}".format(recipient)
-        print(ret_msg)
+
         return ret_msg
     except Exception as ex:
         raise RuntimeError("Email sending failed\n{}\n{}".format(ex, traceback.format_exc()))
