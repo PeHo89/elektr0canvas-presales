@@ -156,7 +156,7 @@ def add_tx_hash_to_buyer(request):
     b.tx_hash = tx_hash
     b.save()
 
-    verify_tx(order_id)
+    verify_tx(order_id=order_id, attempt=1)
 
     return Response({"success": True})
 
