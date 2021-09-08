@@ -26,7 +26,7 @@ def verify_tx(order_id, attempt):
         print(f'TX verification attempt #{attempt}: order {order_id} confirmed.')
         b.tx_confirmed = True
         b.save()
-    elif attempt <= WEB3_TX_VERIFICATION_MAX_ATTEMPTS:
+    elif attempt < WEB3_TX_VERIFICATION_MAX_ATTEMPTS:
         print(f'TX verification attempt #{attempt}: order {order_id} not confirmed. Trying it another time.')
         verify_tx(order_id=order_id, attempt=attempt+1)
     else:
