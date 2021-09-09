@@ -8,7 +8,7 @@ class FrameAdmin(admin.ModelAdmin):
 @admin.register(Buyer)
 class BuyerAdmin(admin.ModelAdmin):
     actions = ['download_csv']
-    list_display = ('email', 'first_name', 'last_name', 'company', 'address1', 'address2', 'zip_code', 'city', 'country', 'phone', 'frame', 'order_date')
+    list_display = ('email', 'first_name', 'last_name', 'company', 'address1', 'address2', 'zip_code', 'city', 'country', 'phone', 'frame', 'order_date', 'order_id', 'tx_confirmed', 'tx_hash')
     def download_csv(self, request, queryset):
         import csv
         from django.http import HttpResponse
@@ -16,7 +16,7 @@ class BuyerAdmin(admin.ModelAdmin):
 
         f = StringIO()
         writer = csv.writer(f)
-        writer.writerow(['NO', 'Email', 'Name', 'Company', 'Address', 'Zip code', 'City', 'Country', 'Phone', 'Frame', 'Date'])
+        writer.writerow(['NO', 'Email', 'Name', 'Company', 'Address', 'Zip code', 'City', 'Country', 'Phone', 'Frame', 'Date', 'Order ID', 'TX Confirmed', 'TX Hash'])
         idx = 1
         for s in queryset:
             writer.writerow([
@@ -30,7 +30,10 @@ class BuyerAdmin(admin.ModelAdmin):
                 s.country,
                 s.phone,
                 s.frame,
-                s.order_date
+                s.order_date,
+                s.order_id,
+                s.tx_confirmed,
+                s.tx_hash,
             ])
             idx += 1
 
